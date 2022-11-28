@@ -3,31 +3,39 @@ import StarWarsContext from '../context/StarWarsContext';
 
 export default function Table() {
   const { data } = useContext(StarWarsContext);
+  const columnOptions = ['population', 'orbital_period',
+    'diameter', 'rotation_period', 'surface_water'];
   const [nameFilter, setNameFilter] = useState('');
-  const [filteredInformation, setFilteredInformation] = useState([]);
+  const [infoFilter, setInfoFilter] = useState([]);
   const [filters, setFilters] = useState({
     columnFilter: 'population',
     comparisonFilter: 'maior que',
     valueFilter: '0',
   });
-  const [numbers, setNumbers] = useState([]);
+  const [numberFilter, setNumberFilter] = useState([]);
+  const [singleFilter, setSingleFilter] = useState(columnOptions);
+
   const handleChange = (event) => {
     setFilters({ ...filters, [event.target.name]: event.target.value });
   };
 
   const filterButton = () => {
-    setNumbers([...numbers, filters]);
+    setNumberFilter([...numberFilter, filters]);
+    const stopFilterRepeat = singleFilter.filter((option) => option
+    !== filters.columnFilter);
+    setSingleFilter(stopFilterRepeat); // this variable within the filter button function prevents filters repeating itself
   };
-  // console.log(numbers);
+  // console.log(numberFilter);
 
   useEffect(() => {
     const filterFunction = () => {
       let planets = data;
 
       planets = data.filter((element) => element
-        .name.toLowerCase().includes(nameFilter.toLowerCase()));// https://stackoverflow.com/questions/63877217/change-the-search-term-to-lower-case-in-reactjs
+        .name.toLowerCase().includes(nameFilter.toLowerCase())); // this changes all search data to lower case letters to prevent search discrepancies
+      // https://stackoverflow.com/questions/63877217/change-the-search-term-to-lower-case-in-reactjs
 
-      numbers.forEach((element) => {
+      numberFilter.forEach((element) => {
         switch (element.comparisonFilter) {
         case 'maior que':
           planets = planets.filter(
@@ -50,11 +58,11 @@ export default function Table() {
         default: // do nothing // https://stackoverflow.com/questions/8021321/what-if-i-dont-write-default-in-switch-case
         }
       });
-
-      setFilteredInformation(planets);
+      setFilters({ ...filters, columnFilter: singleFilter[0] });
+      setInfoFilter(planets);
     };
     filterFunction();
-  }, [data, nameFilter, numbers]);
+  }, [data, nameFilter, numberFilter, singleFilter]);
   return (
     <>
       <form>
@@ -78,11 +86,11 @@ export default function Table() {
             value={ filters.columnFilter }
             onChange={ handleChange }
           >
-            <option>population</option>
-            <option>orbital_period</option>
-            <option>diameter</option>
-            <option>rotation_period</option>
-            <option>surface_water</option>
+            {
+              singleFilter.map((el) => (
+                <option key={ el }>{el}</option>
+              ))
+            }
           </select>
         </label>
         <label
@@ -122,7 +130,7 @@ export default function Table() {
         </button>
         <div>
           {
-            numbers.map((element, index) => (
+            numberFilter.map((element, index) => (
               <p key={ `${element.columnFilter}-${index}` }>
                 {`${element.columnFilter} 
                 ${element.comparisonFilter} ${element.valueFilter}`}
@@ -152,7 +160,7 @@ export default function Table() {
         </thead>
         <tbody>
           {
-            filteredInformation.map((element) => (
+            infoFilter.map((element) => (
               <tr key={ element.name }>
                 <td>{ element.name }</td>
                 <td>{ element.rotation_period }</td>
