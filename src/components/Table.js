@@ -27,7 +27,7 @@ export default function Table() {
   };
   // console.log(numberFilter);
 
-  useEffect(() => {
+  useEffect(() => { // Sergio Francisco's mentorship helped me to create the filterFunction.
     const filterFunction = () => {
       let planets = data;
 
@@ -63,6 +63,22 @@ export default function Table() {
     };
     filterFunction();
   }, [data, nameFilter, numberFilter, singleFilter]);
+
+  // this function removes one filter at a time.
+  const removeFilter = (event) => {
+    const removeNumbers = numberFilter.filter((element) => (
+      element.columnFilter !== event.target.id
+    ));
+    setSingleFilter([...singleFilter, event.target.id]);
+    setNumberFilter(removeNumbers);
+  };
+
+  // this function removes all filters at once.
+  const removeAllFilters = () => {
+    setNumberFilter([]);
+    setSingleFilter([]);
+  };
+  // this site showed me how to map the filters correctly // https://refine.dev/blog/react-search-bar-and-filtering/
   return (
     <>
       <form>
@@ -87,8 +103,8 @@ export default function Table() {
             onChange={ handleChange }
           >
             {
-              singleFilter.map((el) => (
-                <option key={ el }>{el}</option>
+              singleFilter.map((element) => (
+                <option key={ element }>{element}</option>
               ))
             }
           </select>
@@ -131,12 +147,30 @@ export default function Table() {
         <div>
           {
             numberFilter.map((element, index) => (
-              <p key={ `${element.columnFilter}-${index}` }>
+              <p
+                key={ `${element.columnFilter} button${element.comparisonFilter}` }
+                data-testid="filter"
+              >
                 {`${element.columnFilter} 
                 ${element.comparisonFilter} ${element.valueFilter}`}
+                <button
+                  type="button"
+                  key={ `${element.columnFilter} ${index}` }
+                  id={ element.columnFilter }
+                  onClick={ removeFilter }
+                >
+                  Remove Filter
+                </button>
               </p>
             ))
           }
+          <button
+            type="button"
+            data-testid="button-remove-filters"
+            onClick={ removeAllFilters }
+          >
+            Remove All Filters
+          </button>
         </div>
       </form>
       <table>
