@@ -22,4 +22,4 @@ export default function StarWarsProvider({ children }) {
   );
 }
 StarWarsProvider.propTypes = {
-  children: PropTypes.func.isRequired };
+  children: PropTypes.node.isRequired };

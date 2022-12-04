@@ -173,8 +173,8 @@ export default function Table() {
           </button>
         </div>
       </form>
+      <h1> Star Wars</h1>
       <table>
-        <h1> Star Wars</h1>
         <thead>
           <tr>
             <th>Name</th>
