@@ -36,27 +36,25 @@ export default function Table() {
       // https://stackoverflow.com/questions/63877217/change-the-search-term-to-lower-case-in-reactjs
 
       numberFilter.forEach((element) => {
-        switch (element.comparisonFilter) {
-        case 'maior que':
+        if (element.comparisonFilter === 'maior que') {
           planets = planets.filter(
             (planet) => (Number(planet[element.columnFilter] !== Number)
           && Number(planet[element.columnFilter]) > Number(element.valueFilter)),
           );
-          break;
-        case 'menor que':
+        }
+        if (element.comparisonFilter === 'menor que') {
           planets = planets.filter(
             (planet) => (Number(planet[element.columnFilter] !== Number))
           && Number(planet[element.columnFilter]) < Number(element.valueFilter),
           );
-          break;
-        case 'igual a':
+        }
+        if (element.comparisonFilter === 'igual a') {
           planets = planets.filter(
             (planet) => (Number(planet[element.columnFilter] !== Number)
           && Number(planet[element.columnFilter]) === Number(element.valueFilter)),
           );
-          break;
-        default: // do nothing // https://stackoverflow.com/questions/8021321/what-if-i-dont-write-default-in-switch-case
-        }
+        }// I changed switch case condition to if else because it has a better coverage test percentage
+        // similar doubt : https://trybecourse.slack.com/archives/C03G5SRQSLE/p1666384155632839
       });
       setFilters({ ...filters, columnFilter: singleFilter[0] });
       setInfoFilter(planets);
