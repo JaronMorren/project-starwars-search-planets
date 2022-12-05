@@ -56,6 +56,21 @@ describe('Test the App', () => {
       expect(filterButton).toBeInTheDocument();
   });
 
+  it('if remove all filters button renders correctly', () => {
+    global.fetch = jest.fn(async () => ({
+      json: async () => mockData
+    }));
+
+    render(
+    <StarWarsProvider>
+      <App />
+    </StarWarsProvider>);
+
+    const buttonRemoveFilter = screen.getByTestId("button-remove-filters");
+
+    waitFor(() => expect(buttonRemoveFilter).toBeInTheDocument())
+  });
+
  
   it('if the table is rendered with all planets', () => {
     global.fetch = jest.fn(async () => ({
@@ -89,9 +104,17 @@ describe('Test the App', () => {
     userEvent.type(valueFilter, '5000');
     userEvent.click(filterButton);
     const result = screen.getAllByRole('row');
-     
-    waitFor(() => expect(result).toHaveLength(1));
+    const buttonRemoveFilter = screen.getByText("Remove Filter");
+    const planet = screen.findByText("Bespin");
 
+
+    waitFor(() => expect(result).toHaveLength(1));
+    waitFor(() => expect(planet).toBeInTheDocument());
+    waitFor(() => expect(buttonRemoveFilter).toBeInTheDocument())
+    userEvent.click(buttonRemoveFilter);
+    waitFor(() => expect(buttonRemoveFilter).not.toBeInTheDocument())
+
+  
   })
 
   it('if the `less than`comparison  works correctly', () => {

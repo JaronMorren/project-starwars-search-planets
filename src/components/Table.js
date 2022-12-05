@@ -38,20 +38,22 @@ export default function Table() {
       numberFilter.forEach((element) => {
         if (element.comparisonFilter === 'maior que') {
           planets = planets.filter(
-            (planet) => (Number(planet[element.columnFilter] !== Number)
-          && Number(planet[element.columnFilter]) > Number(element.valueFilter)),
+            (planet) => (
+              Number(planet[element.columnFilter]) > Number(element.valueFilter)
+            ),
           );
         }
         if (element.comparisonFilter === 'menor que') {
           planets = planets.filter(
-            (planet) => (Number(planet[element.columnFilter] !== Number))
-          && Number(planet[element.columnFilter]) < Number(element.valueFilter),
+            (planet) => (
+              Number(planet[element.columnFilter]) < Number(element.valueFilter)
+            ),
           );
         }
         if (element.comparisonFilter === 'igual a') {
           planets = planets.filter(
-            (planet) => (Number(planet[element.columnFilter] !== Number)
-          && Number(planet[element.columnFilter]) === Number(element.valueFilter)),
+            (planet) => (
+              Number(planet[element.columnFilter]) === Number(element.valueFilter)),
           );
         }// I changed switch case condition to if else because it has a better coverage test percentage
         // similar doubt : https://trybecourse.slack.com/archives/C03G5SRQSLE/p1666384155632839
