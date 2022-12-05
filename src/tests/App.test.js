@@ -107,14 +107,19 @@ describe('Test the App', () => {
     const filter = screen.getAllByRole('combobox');
     const valueFilter = screen.getByTestId('value-filter');
     const filterButton = screen.getByRole('button', { name: 'Filter' });
-    userEvent.selectOptions(filter[0], ['rotation_period']);
+
+    userEvent.selectOptions(filter[0], ['population']);
     userEvent.selectOptions(filter[1], ['menor que']);
-    userEvent.type(valueFilter, '18');
+    userEvent.type(valueFilter, "200000");
     userEvent.click(filterButton);
     const result = screen.getAllByRole('row');
+
+    const planet = screen.findByText("Tatooine");
      
     waitFor(() => expect(result).toHaveLength(1));
-
+    waitFor(() => expect(planet).toBeInTheDocument());
+// Following doubt on Slack helped me to build this test
+    //https://trybecourse.slack.com/archives/C03G5SRQSLE/p1666455730429019?thread_ts=1666384155.632839&cid=C03G5SRQSLE
   })
 
   it('if the `equals`comparison  works correctly ', () => {
