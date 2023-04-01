@@ -1,13 +1,44 @@
-# :construction: README customizado em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto no qual você pode customizar e reutilizar todas as vezes que for executar o trybe-publisher.
+Project Star Wars Search Planets
 
-Para deixá-lo com a sua cara, basta alterar o seguinte arquivo da sua máquina: ~/.student-repo-publisher/custom/_NEW_README.md
+Welcome to the Project Star Wars Search Planets repository! This is a simple web application built with React that allows users to search for planets from the Star Wars universe using the SWAPI (Star Wars API).
 
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+    🛠 Skills
+
+Javascript, React, HTML, CSS...
+
+Getting started
+
+To run the application locally, you need to have Node.js and npm (Node Package Manager) installed on your machine. You can download them from the official website: https://nodejs.org/.
+
+Once you have Node.js and npm installed, follow these steps:
+
+    Clone this repository to your local machine using the command: git clone https://github.com/JaronMorren/project-starwars-search-planets.git
+    Navigate to the src folder using the command: cd project-starwars-search-planets/src
+    Install the project dependencies using the command: npm install
+    Start the development server using the command: npm start
+    Open your browser and go to http://localhost:3000
+
+You should see the application running in your browser. Now you can search for planets and see their details.
+Features
+
+The application has the following features:
+
+    Search for planets by name
+    See a list of matching planets
+    Click on a planet to see its details (such as climate, terrain, and population)
+    Navigate between the search results and the planet details using the browser back and forward buttons
+    Handle errors and display error messages if something goes wrong with the API request
+    
+
+
+Dependencies
+
+The application uses the following dependencies:
+
+    React: a JavaScript library for building user interfaces
+    React Router: a routing library for React
+    Axios: a promise-based HTTP client for making API requests
+
+Credits
+
+This project was created by Jaron Morren. It was built with React and uses the SWAPI (Star Wars API) to fetch data about Star Wars planets.
