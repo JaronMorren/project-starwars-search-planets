@@ -37,7 +37,6 @@ The application uses the following dependencies:
 
     React: a JavaScript library for building user interfaces
     React Router: a routing library for React
-    Axios: a promise-based HTTP client for making API requests
 
 Credits
 
